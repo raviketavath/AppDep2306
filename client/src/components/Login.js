@@ -8,7 +8,9 @@ function Login() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    axios.defaults.baseURL = "http://localhost:1234";
+    // removing apiendpoint for generating build folder 
+    // axios.defaults.baseURL = "http://localhost:1234";
+    axios.defaults.baseURL = "";
     axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
     emailInputRef.current.value = localStorage.getItem("email");
     passwordInputRef.current.value = localStorage.getItem("password");

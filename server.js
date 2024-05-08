@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const multer = require("multer");
@@ -6,7 +7,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const jwt = require("jsonwebtoken");
 // const  token = require("morgan");
-const bcrypt=require("bcrypt");
+const bcrypt = require("bcrypt");
 
 // form Data model
 //diskStorege gives you full controlll for uoloading files
@@ -38,6 +39,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
 app.use("/upload", express.static("upload"));
+app.use(express.static(path.join(__dirname, "./client/build")));
 
 let userSchema = new mongoose.Schema({
   firstName: String,
@@ -56,11 +58,13 @@ app.post("/validateLogin", upload.none(), async (req, res) => {
   if (userDetails.length == 0) {
     res.json({ status: "failure", msg: "user doesNot exist." });
   } else {
-
-    let result=await bcrypt.compare(req.body.password,userDetails[0].password)
+    let result = await bcrypt.compare(
+      req.body.password,
+      userDetails[0].password
+    );
     console.log(result);
-    // if (userDetails[0].password == req.body.password) 
-    if(result== true){
+    // if (userDetails[0].password == req.body.password)
+    if (result == true) {
       console.log(userDetails[0]);
 
       let encryptedCredentials = jwt.sign(
@@ -125,7 +129,7 @@ app.post("/signup", upload.single("profilePic"), async (req, res) => {
   console.log(req.file);
   console.log(req.body);
 
-  let hashedPassword=await bcrypt.hash(req.body.password,10);
+  let hashedPassword = await bcrypt.hash(req.body.password, 10);
   console.log(req.body.password);
   console.log(hashedPassword);
 

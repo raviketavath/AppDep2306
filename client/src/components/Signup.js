@@ -28,7 +28,7 @@ function Signup() {
       body: JSON.stringify(dataToSend),
     };
 
-    let JSONData = await fetch("http://localhost:1234/Signup", reqOptions);
+    let JSONData = await fetch("/Signup", reqOptions);
     let JSOData = await JSONData.json();
     console.log(JSOData);
   };
@@ -52,7 +52,7 @@ function Signup() {
       body: dataToSend,
     };
 
-    let JSONData = await fetch("http://localhost:1234/Signup", reqOptons);
+    let JSONData = await fetch("/Signup", reqOptons);
     let JSOData = await JSONData.json();
     console.log(JSOData);
   };
@@ -72,7 +72,7 @@ function Signup() {
       body: dataToSend,
     };
 
-    let JSONData = await fetch("http://localhost:1234/signup", reqOptons);
+    let JSONData = await fetch("/signup", reqOptons);
     let JSOData = await JSONData.json();
      alert(JSOData.msg);
     console.log(JSOData);

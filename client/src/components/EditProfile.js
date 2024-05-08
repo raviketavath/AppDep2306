@@ -41,7 +41,7 @@ function EditProfile() {
       body: dataToSend,
     };
 
-    let JSONData = await fetch("http://localhost:1234/updateDetails", reqOptons);
+    let JSONData = await fetch("/updateDetails", reqOptons);
     let JSOData = await JSONData.json();
     alert(JSOData.msg);
     console.log(JSOData);
